@@ -7,7 +7,7 @@ public class RandomNum {
 		Random Random = new Random();
 		DecimalFormat dec = new DecimalFormat("0.00");
 
-		double y = 0.50;
+		double y = 0.51;
 		double z = 3.00;
 		int per10 = 10;
 		int per35 = 35;
