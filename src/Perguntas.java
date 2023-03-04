@@ -1,11 +1,23 @@
-import java.util.Scanner;
 import java.text.DecimalFormat;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Perguntas {
 
-	public static void main(String[] args) {
-		@SuppressWarnings("resource")
+	
+	
+	public static void mostrar(String pergunta, String o1, String o2, String o3, String o4) {
+		System.out.println(pergunta);
+		System.out.println(o1);
+		System.out.println(o2);
+		System.out.println(o3);
+		System.out.println(o4);
+		
+	}
+	
+	public static void comecar() {
+
+//		3 1 2 1 1 2 1 1 2 4 1 2 4 1 2 2 1 2 3 1 2 2 1 2 1 1 2 3 1 2
 		Scanner sc = new Scanner(System.in);
 		Random Random = new Random();
 		DecimalFormat dec = new DecimalFormat("0.00");
@@ -17,7 +29,8 @@ public class Perguntas {
 
 		int per10 = 10;
 		int per35 = 35;
-		float percentage = (Random.nextFloat(per10, per35));
+
+		float percentage = Random.nextFloat(per10, per35);
 
 		double premioIn = Random.nextDouble(minPremio, maxPremio);
 
@@ -72,21 +85,18 @@ public class Perguntas {
 		int certeza10;
 
 		// Introduce//
-		System.out.println("Olá, qual ao seu nome?");
-		nome = sc.next();
+		System.out.println("Olá, qual é o seu nome?");
+		nome = sc.nextLine();
 
 		System.out.println("seja bem-vindo ao jogo do 100zão " + nome);
 		do {
+			System.out.println("O valor do premio inicial é de: " + dec.format(premioIn));
+			
+			mostrar("qual a capital do Brasil", 
+					"1) Salvador", "2) São Paulo", 
+					"3) Brasilia", "4) Rio De Janeiro");
 
-			System.out.println("O valor do premio inicial é de: " + (dec.format(premioIn)));
 
-			// Questions//
-			System.out.println("qual a capital do Brasil");
-
-			System.out.println("1) Salvador");
-			System.out.println("2) São Paulo");
-			System.out.println("3) Brasilia");
-			System.out.println("4) Rio De Janeiro");
 
 			System.out.println("escolha a alternativa correta");
 
@@ -97,34 +107,33 @@ public class Perguntas {
 			certeza1 = sc.nextInt();
 		} while (certeza1 == 2);
 		if (alternativa1 == correta1) {
-			System.out.println("Parabens vc acertou e ganhou:" + (dec.format(premioIn)));
-		} else if (alternativa1 != correta1) {
+			System.out.println("Parabens vc acertou e ganhou:" + dec.format(premioIn));
+		} else {
 			System.out.println("Voce errou e perdeu tudo.");
 			return;
 		}
 
+		double desconto = percentage / 100 * premioIn;
+		double valorFinal = premioIn - desconto;
+		System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(valorFinal)));
+		System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(valorFinal)) + "?");
+		System.out.println("Digite (1) para sim e (2) para não");
+		int parar = sc.nextInt();
+		if (parar == 1) {
+			System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
+			return;
+		}
+		valorPergunta2 = premioIn * 2;
+
 		do {
-			double desconto = percentage / 100 * premioIn;
-			System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
-			System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
-			System.out.println("Digite (1) para sim e (2) para não");
-			int parar = sc.nextInt();
-			if (parar == 1) {
-				System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
-				return;
-			}
 
-			valorPergunta2 = premioIn * 2;
+			
 			System.out.println("o premio desta rodada é de: " + (dec.format(valorPergunta2)));
-			System.out.println("Complete a musica:");
 
-			System.out.println("Olha se voce___");
-
-			System.out.println("1) Não me ama");
-			System.out.println("2) azul caneta");
-			System.out.println("3) plock plock");
-			System.out.println("4) braw stars");
-
+			mostrar("Complete a musica: \n Olha se voce___", 
+					"1) Não me ama", "2) azul caneta", 
+					"3) plock plock", "4) braw stars");
+			
 			System.out.println("escolha a alternativa correta");
 
 			alternativa2 = sc.nextInt();
@@ -140,18 +149,20 @@ public class Perguntas {
 			return;
 		}
 
-		do {
-			double desconto = percentage / 100 * valorPergunta2;
-			System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
-			System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
-			System.out.println("Digite (1) para sim e (2) para não");
-			int parar = sc.nextInt();
-			if (parar == 1) {
-				System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
-				return;
-			}
+		desconto = percentage / 100 * valorPergunta2;
+		System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
+		System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
+		System.out.println("Digite (1) para sim e (2) para não");
+		parar = sc.nextInt();
+		if (parar == 1) {
+			System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
+			return;
+		}
 
-			valorPergunta3 = valorPergunta2 * 2;
+		valorPergunta3 = valorPergunta2 * 2;
+		
+		do {
+			
 			System.out.println("o premio desta rodade é de: " + (dec.format(valorPergunta3)));
 			System.out.println("Em qual continente o Brasil fica?");
 
@@ -175,18 +186,18 @@ public class Perguntas {
 			return;
 		}
 
+		desconto = percentage / 100 * valorPergunta3;
+		System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
+		System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
+		System.out.println("Digite (1) para sim e (2) para não");
+		parar = sc.nextInt();
+		if (parar == 1) {
+			System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
+			return;
+		}
+		
+		valorPergunta4 = valorPergunta3 * 2;
 		do {
-			double desconto = percentage / 100 * valorPergunta3;
-			System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
-			System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
-			System.out.println("Digite (1) para sim e (2) para não");
-			int parar = sc.nextInt();
-			if (parar == 1) {
-				System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
-				return;
-			}
-
-			valorPergunta4 = valorPergunta3 * 2;
 			System.out.println("o premio desta rodade é de: " + (dec.format(valorPergunta4)));
 			System.out.println("Quantas vezes o Palmeiras foi campeão mundial?");
 
@@ -210,18 +221,18 @@ public class Perguntas {
 			return;
 		}
 
+		desconto = percentage / 100 * valorPergunta4;
+		System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
+		System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
+		System.out.println("Digite (1) para sim e (2) para não");
+		parar = sc.nextInt();
+		if (parar == 1) {
+			System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
+			return;
+		}
+		
+		valorPergunta5 = valorPergunta4 * 2;
 		do {
-			double desconto = percentage / 100 * valorPergunta4;
-			System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
-			System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
-			System.out.println("Digite (1) para sim e (2) para não");
-			int parar = sc.nextInt();
-			if (parar == 1) {
-				System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
-				return;
-			}
-
-			valorPergunta5 = valorPergunta4 * 2;
 			System.out.println("o premio desta rodade é de: " + (dec.format(valorPergunta5)));
 			System.out.println("Quantos gols o Pelé tem na carreira");
 
@@ -245,18 +256,18 @@ public class Perguntas {
 			return;
 		}
 
+		desconto = percentage / 100 * valorPergunta5;
+		System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
+		System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
+		System.out.println("Digite (1) para sim e (2) para não");
+		parar = sc.nextInt();
+		if (parar == 1) {
+			System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
+			return;
+		}
+		
+		valorPergunta6 = valorPergunta5 * 2;
 		do {
-			double desconto = percentage / 100 * valorPergunta5;
-			System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
-			System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
-			System.out.println("Digite (1) para sim e (2) para não");
-			int parar = sc.nextInt();
-			if (parar == 1) {
-				System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
-				return;
-			}
-
-			valorPergunta6 = valorPergunta5 * 2;
 			System.out.println("o premio desta rodade é de: " + (dec.format(valorPergunta6)));
 			System.out.println("Quantas copas o Brasil tem?");
 
@@ -280,12 +291,13 @@ public class Perguntas {
 			return;
 		}
 
+		desconto = percentage / 100 * valorPergunta6;
+		System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
+		System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
+		System.out.println("Digite (1) para sim e (2) para não");
+		parar = sc.nextInt();
+		
 		do {
-			double desconto = percentage / 100 * valorPergunta6;
-			System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
-			System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
-			System.out.println("Digite (1) para sim e (2) para não");
-			int parar = sc.nextInt();
 			if (parar == 1) {
 				System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
 				return;
@@ -315,18 +327,18 @@ public class Perguntas {
 			return;
 		}
 
+		desconto = percentage / 100 * valorPergunta7;
+		System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
+		System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
+		System.out.println("Digite (1) para sim e (2) para não");
+		parar = sc.nextInt();
+		if (parar == 1) {
+			System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
+			return;
+		}
+		
+		valorPergunta8 = valorPergunta7 * 2;
 		do {
-			double desconto = percentage / 100 * valorPergunta7;
-			System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
-			System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
-			System.out.println("Digite (1) para sim e (2) para não");
-			int parar = sc.nextInt();
-			if (parar == 1) {
-				System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
-				return;
-			}
-
-			valorPergunta8 = valorPergunta7 * 2;
 			System.out.println("o premio desta rodade é de: " + (dec.format(valorPergunta8)));
 			System.out.println("Quando os russos celebram a revolução de outubro?");
 
@@ -350,17 +362,19 @@ public class Perguntas {
 			return;
 		}
 
-		do {
-			double desconto = percentage / 100 * valorPergunta8;
-			System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
-			System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
-			System.out.println("Digite (1) para sim e (2) para não");
-			int parar = sc.nextInt();
-			if (parar == 1) {
-				System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
-				return;
-			}
+		desconto = percentage / 100 * valorPergunta8;
+		System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
+		System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
+		System.out.println("Digite (1) para sim e (2) para não");
+		parar = sc.nextInt();
+		if (parar == 1) {
+			System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
+			return;
+		}
 
+		
+		do {
+			
 			valorPergunta9 = valorPergunta8 * 2;
 			System.out.println("o premio desta rodade é de: " + (dec.format(valorPergunta9)));
 			System.out.println("Você tinha 20 vacas. Todas morrem, menos 6. Quantas ficam?");
@@ -385,16 +399,8 @@ public class Perguntas {
 			return;
 		}
 
+		
 		do {
-			double desconto = percentage / 100 * valorPergunta9;
-			System.out.println("se voce decidir parar o seu premio vai ser de: " + (dec.format(desconto)));
-			System.out.println("Voce deseja parar de jogar e resgatar o premio de: " + (dec.format(desconto)) + "?");
-			System.out.println("Digite (1) para sim e (2) para não");
-			int parar = sc.nextInt();
-			if (parar == 1) {
-				System.out.println("voce decidiu parar e resgatou: " + (dec.format(desconto)) + " Obrigado por jogar!");
-				return;
-			}
 
 			valorPergunta10 = valorPergunta9 * 2;
 			System.out.println("o premio desta rodade é de: " + (dec.format(valorPergunta10)));
